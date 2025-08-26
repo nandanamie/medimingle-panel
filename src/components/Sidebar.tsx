@@ -7,7 +7,9 @@ import {
   Calendar,
   Phone,
   Mail,
-  MessageSquare
+  MessageSquare,
+  UserCog,
+  UserCheck
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
@@ -19,6 +21,11 @@ const navigation = [
   { name: "Relatórios", href: "/relatorios", icon: BarChart3 },
   { name: "Agenda", href: "/agenda", icon: Calendar },
   { name: "Configurações", href: "/configuracoes", icon: Settings },
+];
+
+const profileNavigation = [
+  { name: "Perfil Atendente", href: "/perfil-atendente", icon: UserCog },
+  { name: "Perfil Cliente", href: "/perfil-cliente", icon: UserCheck },
 ];
 
 const channels = [
@@ -58,6 +65,32 @@ export function Sidebar() {
               {item.name}
             </NavLink>
           ))}
+        </div>
+
+        {/* Profile Section */}
+        <div className="mt-8">
+          <h3 className="mb-3 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            Perfis (Exemplo)
+          </h3>
+          <div className="space-y-1">
+            {profileNavigation.map((item) => (
+              <NavLink
+                key={item.name}
+                to={item.href}
+                className={({ isActive }) =>
+                  cn(
+                    "group flex items-center rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 hover:bg-secondary/50",
+                    isActive
+                      ? "bg-primary text-primary-foreground shadow-soft"
+                      : "text-foreground hover:text-primary"
+                  )
+                }
+              >
+                <item.icon className="mr-3 h-5 w-5" />
+                {item.name}
+              </NavLink>
+            ))}
+          </div>
         </div>
 
         {/* Channels Section */}
